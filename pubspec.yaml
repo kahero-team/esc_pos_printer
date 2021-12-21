@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   esc_pos_utils: ^0.3.5
   escposprinter:
-    git: https://github.com/bailabs/esc-pos-printer-flutter
+    git: https://github.com/kahero-team/escposprinter
   # esc_pos_utils:
     # path: ../esc_pos_utils
 
