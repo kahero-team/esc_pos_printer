@@ -6,9 +6,8 @@ import 'package:escposprinter/escposprinter.dart';
 import './enums.dart';
 
 class PrinterUsbManager {
-
   Future<List> getDevices() async {
-    List devices = await Escposprinter.getUSBDeviceList;
+    List devices = await Escposprinter.usbDeviceList;
     return devices;
   }
 
