@@ -12,9 +12,9 @@ import './enums.dart';
 
 /// Printer Network Manager
 class PrinterNetworkManager {
-  String _host;
-  int _port;
-  Duration _timeout;
+  String? _host;
+  int? _port;
+  Duration? _timeout;
 
   /// Select a network printer
   ///
@@ -30,14 +30,14 @@ class PrinterNetworkManager {
     _timeout = timeout;
   }
 
-  Future<PosPrintResult> printTicket(Ticket ticket) {
+  Future<PosPrintResult> printTicket(Ticket? ticket) {
     if (_host == null || _port == null) {
       return Future<PosPrintResult>.value(PosPrintResult.printerNotSelected);
     } else if (ticket == null || ticket.bytes.isEmpty) {
       return Future<PosPrintResult>.value(PosPrintResult.ticketEmpty);
     }
 
-    return Socket.connect(_host, _port, timeout: _timeout)
+    return Socket.connect(_host, _port ?? 9100, timeout: _timeout)
         .then((Socket socket) {
       socket.add(ticket.bytes);
       socket.destroy();

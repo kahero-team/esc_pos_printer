@@ -1,14 +1,15 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:intl/intl.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:flutter/material.dart' hide Image;
+
 import 'package:esc_pos_printer/esc_pos_printer.dart';
-import 'package:flutter/services.dart';
-import 'package:ping_discover_network/ping_discover_network.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
+import 'package:flutter/material.dart' hide Image;
+import 'package:flutter/services.dart';
 import 'package:image/image.dart';
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:ping_discover_network/ping_discover_network.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:wifi/wifi.dart';
 
 void main() => runApp(MyApp());
@@ -51,8 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
       print('local ip:\t$ip');
     } catch (e) {
       final snackBar = SnackBar(
-          content: Text('WiFi is not connected', textAlign: TextAlign.center));
-      Scaffold.of(ctx).showSnackBar(snackBar);
+        content: Text(
+          'WiFi is not connected',
+          textAlign: TextAlign.center,
+        ),
+      );
+      ScaffoldMessenger.of(ctx).showSnackBar(snackBar);
       return;
     }
     setState(() {
@@ -87,8 +92,12 @@ class _MyHomePageState extends State<MyHomePage> {
       })
       ..onError((dynamic e) {
         final snackBar = SnackBar(
-            content: Text('Unexpected exception', textAlign: TextAlign.center));
-        Scaffold.of(ctx).showSnackBar(snackBar);
+          content: Text(
+            'Unexpected exception',
+            textAlign: TextAlign.center,
+          ),
+        );
+        ScaffoldMessenger.of(ctx).showSnackBar(snackBar);
       });
   }
 
@@ -307,7 +316,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final PrinterNetworkManager printerManager = PrinterNetworkManager();
     printerManager.selectPrinter(printerIp, port: 9100);
 
-    // TODO Don't forget to choose printer's paper size
     const PaperSize paper = PaperSize.mm80;
 
     // TEST PRINT
@@ -318,9 +326,14 @@ class _MyHomePageState extends State<MyHomePage> {
     final PosPrintResult res =
         await printerManager.printTicket(await demoReceipt(paper));
 
-    final snackBar =
-        SnackBar(content: Text(res.msg, textAlign: TextAlign.center));
-    Scaffold.of(ctx).showSnackBar(snackBar);
+    final snackBar = SnackBar(
+      content: Text(
+        res.msg,
+        textAlign: TextAlign.center,
+      ),
+    );
+
+    ScaffoldMessenger.of(ctx).showSnackBar(snackBar);
   }
 
   @override
@@ -347,10 +360,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 10),
                 Text('Local ip: $localIp', style: TextStyle(fontSize: 16)),
                 SizedBox(height: 15),
-                RaisedButton(
-                    child: Text(
-                        '${isDiscovering ? 'Discovering...' : 'Discover'}'),
-                    onPressed: isDiscovering ? null : () => discover(context)),
+                ElevatedButton(
+                  onPressed: isDiscovering ? null : () => discover(context),
+                  child:
+                      Text('${isDiscovering ? 'Discovering...' : 'Discover'}'),
+                ),
                 SizedBox(height: 15),
                 found >= 0
                     ? Text('Found: $found device(s)',

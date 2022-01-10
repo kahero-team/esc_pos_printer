@@ -5,15 +5,16 @@ homepage: https://github.com/andrey-ushakov/esc_pos_printer
 publish_to: none
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-  escposprinter:
-    git: https://github.com/kahero-team/escposprinter
   esc_pos_utils:
     git: https://github.com/kahero-team/esc_pos_utils_ticket.git
+  escposprinter:
+    git: https://github.com/kahero-team/escposprinter.git
+  flutter:
+    sdk: flutter
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

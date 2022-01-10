@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+// import 'dart:io';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:escposprinter/escposprinter.dart';
 
@@ -7,7 +7,7 @@ import './enums.dart';
 
 class PrinterUsbManager {
   Future<List> getDevices() async {
-    List devices = await Escposprinter.usbDeviceList;
+    final devices = await Escposprinter.usbDeviceList;
     return devices;
   }
 
@@ -23,7 +23,7 @@ class PrinterUsbManager {
     return completer.future;
   }
 
-  Future<PosPrintResult> printTicket(Ticket ticket) {
+  Future<PosPrintResult> printTicket(Ticket? ticket) {
     if (ticket == null || ticket.bytes.isEmpty) {
       return Future<PosPrintResult>.value(PosPrintResult.ticketEmpty);
     }
