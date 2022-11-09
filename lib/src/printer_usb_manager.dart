@@ -29,4 +29,11 @@ class PrinterUsbManager {
     }
     return writeBytes(ticket.bytes);
   }
+
+  Future<PosPrintResult> printLabel(List<int>? bytes) {
+    if (bytes == null || bytes.isEmpty) {
+      return Future<PosPrintResult>.value(PosPrintResult.ticketEmpty);
+    }
+    return writeBytes(bytes);
+  }
 }
