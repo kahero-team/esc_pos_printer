@@ -10,6 +10,7 @@ environment:
 dependencies:
   esc_pos_utils:
     git: https://github.com/kahero-team/esc_pos_utils_ticket.git
+    ref: main
   escposprinter:
     git: https://github.com/kahero-team/escposprinter.git
   flutter:
